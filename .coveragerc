@@ -1,0 +1,7 @@
+[run]
+branch = True
+source =
+    rest_framework_cereal
+
+[report]
+show_missing = True

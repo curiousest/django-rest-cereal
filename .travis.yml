@@ -1,0 +1,28 @@
+language: python
+
+sudo: false
+
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+install:
+  - travis_retry pip install detox tox-travis coverage
+script:
+  - detox -- -v 2
+after_success:
+  - coverage report
+  - bash <(curl -s https://codecov.io/bash)
+
+matrix:
+  include:
+    - python: "3.6"
+      env: TOXENV="performance"
+    - python: "3.6"
+      env: TOXENV="warnings"
+  allow_failures:
+    - env: TOXENV="warnings"
+  fast_finish: true
